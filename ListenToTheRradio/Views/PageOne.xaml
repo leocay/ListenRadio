@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="ListenToTheRradio.Views.PageOne"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <VerticalStackLayout>
+        <Grid BackgroundColor="LightBlue">
+            <Label FontSize="24" Text="Trang 1 - Tùy chỉnh" />
+        </Grid>
+    </VerticalStackLayout>
+</ContentView>
