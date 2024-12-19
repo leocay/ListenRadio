@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="ListenToTheRradio.Views.MediaPlayerController"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <VerticalStackLayout Margin="5,0,5,0">
+        <Border
+            Background="Beige"
+            HorizontalOptions="Center"
+            StrokeShape="RoundRectangle 10,10,10,10"
+            StrokeThickness="0.5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid
+                    Grid.Row="5"
+                    Padding="10,10,10,10"
+                    ColumnDefinitions="*,*,*,*,*,*,*"
+                    ColumnSpacing="5">
+
+                    <Button
+                        x:Name="BackButton"
+                        Grid.Column="2"
+                        Padding="2"
+                        BackgroundColor="Transparent"
+                        FontFamily="FAS"
+                        HorizontalOptions="FillAndExpand"
+                        Text="&#xf04a;"
+                        TextColor="#502BD4"
+                        VerticalOptions="FillAndExpand" />
+
+                    <Button
+                        x:Name="NextButton"
+                        Grid.Column="4"
+                        Padding="2"
+                        BackgroundColor="Transparent"
+                        FontFamily="FAS"
+                        HorizontalOptions="FillAndExpand"
+                        Text="&#xf04e;"
+                        TextColor="#502BD4"
+                        VerticalOptions="FillAndExpand" />
+
+                    <Button
+                        Grid.Column="0"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        FontFamily="FAS"
+                        HorizontalOptions="FillAndExpand"
+                        Text="&#xf049;"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+
+                    <Button
+                        Grid.Column="6"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        FontFamily="FAS"
+                        HorizontalOptions="FillAndExpand"
+                        Text="&#xf050;"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+
+                    <Button
+                        Grid.Column="3"
+                        Padding="0"
+                        FontFamily="FAS"
+                        HorizontalOptions="FillAndExpand"
+                        Text="&#xf04c;"
+                        VerticalOptions="FillAndExpand">
+                        <Button.Triggers>
+                            <DataTrigger
+                                Binding="{Binding MediaElementController.CurrentState}"
+                                TargetType="Button"
+                                Value="Playing">
+                                <Setter Property="Text" Value="&#xf04c;" />
+                            </DataTrigger>
+                            <DataTrigger
+                                Binding="{Binding MediaElementController.CurrentState}"
+                                TargetType="Button"
+                                Value="Paused">
+                                <Setter Property="Text" Value="&#xf04b;" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+
+                </Grid>
+
+                <FlexLayout
+                    Grid.Row="4"
+                    AlignItems="Center"
+                    Direction="Row"
+                    JustifyContent="SpaceBetween">
+                    <Label
+                        Padding="10,0,0,0"
+                        HorizontalOptions="StartAndExpand"
+                        TextColor="Black">
+                        <Label.Text>
+                            <Binding Converter="{StaticResource SecondsToStringConverter}" Path="MediaElementController.Position" />
+                        </Label.Text>
+                    </Label>
+
+                    <Label HorizontalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontFamily="FAS"
+                                    Text="{Binding IconsDisplay}"
+                                    TextColor="Blue" />
+                            </FormattedString>
+
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label
+                        Padding="0,0,10,0"
+                        HorizontalOptions="End"
+                        TextColor="Black">
+                        <Label.Text>
+                            <Binding Converter="{StaticResource SecondsToStringConverter}" Path="MediaElementController.Duration" />
+                        </Label.Text>
+                    </Label>
+                </FlexLayout>
+
+                <Slider
+                    x:Name="PositionSlider"
+                    Grid.Row="3"
+                    MinimumTrackColor="SeaGreen" />
+
+                <Grid
+                    Grid.Row="1"
+                    ColumnDefinitions="4*,*,*,*"
+                    ColumnSpacing="5">
+                    <Label
+                        Grid.Column="0"
+                        Padding="10,0,0,0"
+                        FontFamily="Times New Roman"
+                        FontSize="Body"
+                        HorizontalOptions="StartAndExpand"
+                        TextColor="Blue"
+                        VerticalTextAlignment="Center">
+                        <Label.Text>
+                            <Binding Path="MediaName" />
+                        </Label.Text>
+                    </Label>
+
+                    <Button
+                        x:Name="TimerButton"
+                        Grid.Column="1"
+                        BackgroundColor="Transparent"
+                        FontFamily="FAS"
+                        FontSize="20"
+                        HorizontalOptions="FillAndExpand"
+                        Text="&#xf017;"
+                        TextColor="Red"
+                        VerticalOptions="CenterAndExpand" />
+
+                    <Label
+                        x:Name="CountdownLabel"
+                        Grid.Column="2"
+                        FontSize="Small"
+                        HorizontalTextAlignment="Center"
+                        Text=""
+                        TextColor="Black"
+                        VerticalTextAlignment="Center" />
+
+                    <Button
+                        x:Name="LoopButton"
+                        Grid.Column="3"
+                        BackgroundColor="Transparent"
+                        FontFamily="FAS"
+                        FontSize="20"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="&#xf363;"
+                        TextColor="Red"
+                        VerticalOptions="CenterAndExpand">
+
+                        <Button.Triggers>
+
+                            <DataTrigger
+                                Binding="{Binding MediaElementController.ShouldLoopPlayback}"
+                                TargetType="Button"
+                                Value="true">
+                                <Setter Property="Opacity" Value="1" />
+                            </DataTrigger>
+
+                            <DataTrigger
+                                Binding="{Binding MediaElementController.ShouldLoopPlayback}"
+                                TargetType="Button"
+                                Value="false">
+                                <Setter Property="Opacity" Value="0.3" />
+                            </DataTrigger>
+
+                        </Button.Triggers>
+
+                    </Button>
+
+                </Grid>
+
+            </Grid>
+        </Border>
+    </VerticalStackLayout>
+</ContentView>

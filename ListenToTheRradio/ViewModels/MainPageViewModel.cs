@@ -8,7 +8,7 @@ namespace ListenToTheRradio.ViewModels
     public partial class MainPageViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ObservableCollection<ContentView> _pageList = new ObservableCollection<ContentView>();
+        private ObservableCollection<ContentView> _pageList =[];
 
 
         public MainPageViewModel()
